@@ -1,29 +1,29 @@
-const {products,categories} = require("../Module/Data/StaticData");
+const {db} = require("../Module/Data/StaticData");
 
 exports.Query={
     hello:() => {
         return "Hello World!!!!!";
     },
     product:( parent, {filter}, context) => {
+        //const proList = db.products;
         if(!filter){
-            return products;
+            return db.products;
         }
         if(filter.onSale !== undefined){
-            return products.filter((product) => product.onSale === filter.onSale);
-        }
-        return products;
+            return db.products.filter((product) => product.onSale === filter.onSale);
+        }        
     },
     productDetails:(parent,args,context,info) => {
         const {id} = args;
-        const product = products.find((product) => product.id === id); 
+        const product = db.products.find((product) => product.id === id); 
         return product;
     },
     categories:() => {
-        return categories;
+        return db.categories;
     },
     Category:(parent,args,context,info) => {
         const {id} = args;
-        const category = categories.find((category) => category.id === id);
+        const category = db.categories.find((category) => category.id === id);
         return category;
     },
 }
