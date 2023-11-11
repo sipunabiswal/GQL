@@ -1,0 +1,16 @@
+{
+  "name": "carmanagment",
+  "version": "1.0.0",
+  "description": " The graphQL hands on project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.12.0",
+    "graphql": "^16.7.1"
+  }
+}

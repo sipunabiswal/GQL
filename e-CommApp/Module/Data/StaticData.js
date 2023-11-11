@@ -1,4 +1,4 @@
-exports.products = [
+const products = [
   {
     id: "53a0724c-a416-4cac-ae45-bfaedce1f147",
     name: "Steel Pot",
@@ -90,7 +90,7 @@ exports.products = [
     cattegoryId: "d914aec0-25b2-4103-9ed8-225d39018d1d",
   },
 ];
-exports.categories = [
+const categories = [
   {
     id: "c01b1ff4-f894-4ef2-b27a-22aacc2fca70",
     name: "Kitchen",
@@ -104,7 +104,7 @@ exports.categories = [
     name: "Sports",
   },
 ];
-exports.reviews = [
+const reviews = [
   {
     id: "b22da5d4-6a4b-4db5-8ec3-acc228c36260",
     date: "2021-01-01",
@@ -283,3 +283,8 @@ exports.reviews = [
     productId: "47bf3941-9c8b-42c0-9c72-7f3985492a5b",
   },
 ];
+
+exports.db={
+  products:products,
+  categories:categories,
+}
