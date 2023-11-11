@@ -1,10 +1,10 @@
 import { Posts, Prisma } from "@prisma/client"
-import {Context} from "../index"
+import {Context} from "../../index"
 
 interface PostCreateArgs {
-    post:{
-    title: string
-    content: string
+    posts:{
+    title?: string
+    content?: string
     }
 } 
 
@@ -15,10 +15,11 @@ interface PostPayloadType {
             message: string
         }[]
     posts: Posts| Prisma.Prisma__PostsClient<Posts>| null
-    }
+}
+
 export const Mutation = {
-    postsCreate: async (_:any ,{post}: PostCreateArgs,{prisma}:Context ): Promise<PostPayloadType> => {
-        const {title,content} = post
+    postsCreate: async (_:any ,{ posts }: PostCreateArgs,{ prisma }:Context ): Promise<PostPayloadType> => {
+        const {title,content} = posts
         if(!title || !content){
             return {
                 userErrors : [
@@ -27,15 +28,12 @@ export const Mutation = {
                         message: "title and contents are required."
                     }
                 ],
-                posts: {} as Posts
+                posts: null
             }
         }
 
         return {
-            userErrors : [{
-                field: "success",
-                message: "success"
-            }],
+            userErrors: [],
             posts: await prisma.posts.create({
                 data:{
                     title,
@@ -43,7 +41,23 @@ export const Mutation = {
                     authorId: 1
                 }
             })
+        }        
+    }, 
+    postsUpdate: async(_:any, {postId, posts}:{postId: string, posts: PostCreateArgs["posts"]}, {prisma}:Context )=>{
+        const{title, content} = posts
+        if(!title || !content){
+            return {
+                userErrors : [
+                    {
+                        field: "title and contents",
+                        message: "title and contents are required."
+                    }
+                ],
+                posts: null
+            }
         }
         
-    }, // end postsCreate
+
+    },
+    
 }  
